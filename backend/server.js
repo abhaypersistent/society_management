@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const db = require("./models");
 
 const app = express();
 
@@ -20,6 +21,20 @@ app.get('/',(req,res) => {
 })
 
 const port = process.env.PORT || 8000;
-app.listen(port, ()=>{
-    console.log('server is running');
-});
+
+console.log(db.url);
+// return false;
+db.mongoose.set("strictQuery", false);
+db.mongoose.connect(db.url, {
+    useNewUrlParser: true,
+    useUnifiedTopology:true
+}).then(() => {
+    app.listen(port, ()=>{
+        console.log('server is running');
+    });
+}).catch(err => {
+    console.log(err);
+    console.log("cannot able to connect to the database");
+})
+
+

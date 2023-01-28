@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
-    url: "mongodb+srv://abhayspycoding:tZxRpcmLHK2jxVbV@spycoding.6nq8g.mongodb.net/?retryWrites=true&w=majority"
+    url: process.env.MONGO_URL
   };
